@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+<p align="center">
+    <img src="https://media.licdn.com/dms/image/C4D12AQHPAZFZZxBtng/article-cover_image-shrink_600_2000/0?e=1568246400&v=beta&t=p1FJXS-uNne98PGDRmpY9EkARqatJOAqFzSx948KBxM"
+         width="700" height="142">
+</p>
+<div  align="center">
+
+
+    <form action="/app" method="post" id="form1">
+        <input type="text" size="80" id="keyword">
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="result">Result : </p>
+</div>
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script>
+    $("#form1").submit(function(event){
+        $.ajax({
+            url: '/app',
+            data: {keyword : $('#keyword').val()},
+            type: 'POST',
+            dataType: "text",
+            success: function(response){
+                $('#result').text('Result: ' + response);
+            },
+            error: function (error) {
+                alert(error.data);
+            }
+        });
+        event.preventDefault();
+    });
+
+
+</script>
+</html>
